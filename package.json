@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "clean": "rimraf dist node_modules .nyc_output coverage coverage.lcov",
-    "build": "babel src/server --out-dir ./dist",
+    "build": "babel src --out-dir ./dist",
     "start": "npm run build && node ./dist/index.js",
     "start:dev": "nodemon src/server/index.js --exec babel-node --presets env",
     "test": "mocha ./src/test/ --recursive --exit --require babel-core/register",
@@ -13,7 +13,8 @@
     "db:create": "createdb hiking_club",
     "db:drop": "dropdb hiking_club",
     "db:schema": "psql -h localhost -p 5432 hiking_club < ./src/server/database/schema.sql",
-    "db:seed": "psql -h localhost -p 5432 hiking_club < ./src/server/database/seed.sql"
+    "db:seed": "psql -h localhost -p 5432 hiking_club < ./src/server/database/seed.sql",
+    "db:import": "node ./dist/test/utilities/seed.utilities.js"
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,9 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "nodemon": "^1.17.1",
     "pg-promise": "^7.5.3",
+    "request": "^2.83.0",
     "rimraf": "^2.6.2"
   },
   "nyc": {
